@@ -1,4 +1,4 @@
-package pl.wsb.spotifytracker.artists;
+package pl.wsb.spotifytracker.artists.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
