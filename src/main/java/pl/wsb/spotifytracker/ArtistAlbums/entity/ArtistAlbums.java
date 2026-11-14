@@ -2,6 +2,8 @@ package pl.wsb.spotifytracker.ArtistAlbums.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -29,14 +31,19 @@ public class ArtistAlbums {
     @Column(name = "track_count", nullable = false)
     private int track_count;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "album_type", nullable = false, length = 20)
+    private AlbumType album_type;
+
     protected ArtistAlbums() {
     }
 
-    public ArtistAlbums(String album_title, int artist_id, LocalDate release_date, int track_count) {
+    public ArtistAlbums(String album_title, int artist_id, LocalDate release_date, int track_count, AlbumType album_type) {
         this.album_title = album_title;
         this.artist_id = artist_id;
         this.release_date = release_date;
         this.track_count = track_count;
+        this.album_type = album_type;
     }
 
     public String getAlbum_title() {
@@ -53,5 +60,9 @@ public class ArtistAlbums {
 
     public int track_count() {
         return track_count;
+    }
+
+    public AlbumType getAlbum_type() {
+        return album_type;
     }
 }

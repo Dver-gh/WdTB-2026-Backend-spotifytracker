@@ -1,6 +1,7 @@
 package pl.wsb.spotifytracker.tracks.entity;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -33,15 +34,19 @@ public class Tracks {
     @Column(name = "popularity", nullable = true)
     private int popularity;
 
+    @Embedded
+    private AudioFeatures audioFeatures;
+
     protected Tracks() {
     }
 
-    public Tracks(int track_id, String title, int album_id, int duration_ms, int popularity) {
+    public Tracks(int track_id, String title, int album_id, int duration_ms, int popularity, AudioFeatures audioFeatures) {
         this.track_id = track_id;
         this.title = title;
         this.album_id = album_id;
         this.duration_ms = duration_ms;
         this.popularity = popularity;
+        this.audioFeatures = audioFeatures;
     }
 
     public int getTrack_id() {
@@ -62,5 +67,9 @@ public class Tracks {
 
     public int getPopularity() {
         return popularity;
+    }
+
+    public AudioFeatures getAudioFeatures() {
+        return audioFeatures;
     }
 }
