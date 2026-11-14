@@ -5,10 +5,13 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import lombok.Getter;
+import pl.wsb.spotifytracker.ArtistAlbums.entity.ArtistAlbums;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "artists")
@@ -29,6 +32,9 @@ public class Artists {
 
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
+
+    @OneToMany(mappedBy = "artist")
+    private List<ArtistAlbums> albums = new ArrayList<>();
 
     protected Artists() {
     }
@@ -54,5 +60,9 @@ public class Artists {
 
     public LocalDateTime getCreatedAt() {
         return createdAt;
+    }
+
+    public List<ArtistAlbums> getAlbums() {
+        return albums;
     }
 }

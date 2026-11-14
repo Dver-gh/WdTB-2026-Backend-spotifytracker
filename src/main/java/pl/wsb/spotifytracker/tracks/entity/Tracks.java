@@ -3,13 +3,14 @@ package pl.wsb.spotifytracker.tracks.entity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import lombok.Getter;
-
-import java.time.LocalDate;
+import pl.wsb.spotifytracker.ArtistAlbums.entity.ArtistAlbums;
 
 @Entity
 @Table(name = "tracks")
@@ -25,8 +26,9 @@ public class Tracks {
     @Column(name = "title", length = 50, nullable = false)
     private String title;
 
-    @Column(name = "album_id", nullable = false)
-    private int album_id;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "album_id", nullable = false)
+    private ArtistAlbums album;
 
     @Column(name = "duration_ms", nullable = false)
     private int duration_ms;
@@ -40,10 +42,10 @@ public class Tracks {
     protected Tracks() {
     }
 
-    public Tracks(int track_id, String title, int album_id, int duration_ms, int popularity, AudioFeatures audioFeatures) {
+    public Tracks(int track_id, String title, ArtistAlbums album, int duration_ms, int popularity, AudioFeatures audioFeatures) {
         this.track_id = track_id;
         this.title = title;
-        this.album_id = album_id;
+        this.album = album;
         this.duration_ms = duration_ms;
         this.popularity = popularity;
         this.audioFeatures = audioFeatures;
@@ -57,8 +59,8 @@ public class Tracks {
         return title;
     }
 
-    public int getAlbum_id() {
-        return album_id;
+    public ArtistAlbums getAlbum() {
+        return album;
     }
 
     public int getDuration_ms() {

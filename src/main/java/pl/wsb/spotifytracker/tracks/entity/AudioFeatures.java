@@ -3,10 +3,6 @@ package pl.wsb.spotifytracker.tracks.entity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 
-/**
- * Cechy akustyczne utworu jako klasa wbudowana ({@code @Embeddable}):
- * tempo (BPM) i tonacja. Kolumny trafiają do tabeli {@code tracks}.
- */
 @Embeddable
 public class AudioFeatures {
 

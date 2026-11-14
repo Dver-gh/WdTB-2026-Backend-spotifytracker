@@ -4,10 +4,14 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import pl.wsb.spotifytracker.artists.entity.Artists;
 
 import java.time.LocalDate;
 
@@ -22,8 +26,9 @@ public class ArtistAlbums {
     @Column(name = "album_title", length = 50, nullable = false)
     private String album_title;
 
-    @Column(name = "artist_id", nullable = false)
-    private int artist_id;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "artist_id", nullable = false)
+    private Artists artist;
 
     @Column(name = "release_date", nullable = false)
     private LocalDate release_date;
@@ -38,9 +43,9 @@ public class ArtistAlbums {
     protected ArtistAlbums() {
     }
 
-    public ArtistAlbums(String album_title, int artist_id, LocalDate release_date, int track_count, AlbumType album_type) {
+    public ArtistAlbums(String album_title, Artists artist, LocalDate release_date, int track_count, AlbumType album_type) {
         this.album_title = album_title;
-        this.artist_id = artist_id;
+        this.artist = artist;
         this.release_date = release_date;
         this.track_count = track_count;
         this.album_type = album_type;
@@ -50,8 +55,8 @@ public class ArtistAlbums {
         return album_title;
     }
 
-    public int getArtist_id() {
-        return artist_id;
+    public Artists getArtist() {
+        return artist;
     }
 
     public LocalDate getRelease_date() {

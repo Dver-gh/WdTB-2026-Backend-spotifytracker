@@ -1,6 +1,3 @@
--- Dane startowe aplikacji. Tabele tworzy Hibernate z encji, a ten plik Spring Boot uruchamia zaraz potem.
--- LAB 01: dopiszcie tu konta wszystkich osób z zespołu (reguła R1.03).
--- LAB 02: dopiszcie dane do swoich tabel (kolejność: najpierw tabele, na które wskazują klucze obce).
 insert into user_account (email, display_name, role, created_at) values
     ('ola@student.merito.pl',   'Ola',   'USER',    current_timestamp),
     ('kuba@student.merito.pl',  'Kuba',  'USER',    current_timestamp),
@@ -10,15 +7,10 @@ insert into user_account (email, display_name, role, created_at) values
     ('s281469@student.wroclaw.merito.pl',  'Jakub',  'USER',    current_timestamp),
     ('wrx82055@student.wroclaw.merito.pl',       'Szymon', 'USER', current_timestamp);
 
--- LAB 01: Wasze konta (zmieńcie na swoje dane, rola USER)
--- insert into user_account (email, display_name, role, created_at) values
---     ('imie.nazwisko@student.merito.pl', 'Imię', 'USER', current_timestamp);
-
 INSERT INTO artists (artist_name, artist_genre, artist_followers_count, created_at) VALUES
     ('The Weeknd',   'Synth-pop',         85000000, current_timestamp),
     ('Dua Lipa',     'Pop',               70000000, current_timestamp),
     ('Linkin Park',  'Alternative Rock',  55000000, current_timestamp);
-
 
 INSERT INTO artist_albums (album_title, artist_id, release_date, track_count, album_type) VALUES
     ('After Hours',       1, '2020-03-20', 14, 'ALBUM'),
@@ -30,3 +22,14 @@ INSERT INTO tracks (track_id, title, album_id, duration_ms, popularity, bpm, mus
     (102, 'Save Your Tears',   1, 215626, 90, 118, 'C#maj'),
     (201, 'Levitating',        2, 203064, 92, 103, 'Bmin'),
     (301, 'In the End',        3, 216893, 88,  85, 'F#min');
+
+INSERT INTO listener (user_account_id, display_handle, favorite_genre, country, joined_at) VALUES
+    (5, 'damian_fm',  'Synth-pop',        'PL', current_timestamp),
+    (6, 'kuba_beats', 'Pop',              'PL', current_timestamp),
+    (7, 'szymon_rx',  'Alternative Rock', 'PL', current_timestamp);
+
+INSERT INTO favorite_track (listener_id, track_id, added_at, play_count) VALUES
+    (1, 1, current_timestamp, 42),
+    (1, 3, current_timestamp, 17),
+    (2, 1, current_timestamp,  8),
+    (3, 4, current_timestamp, 95);
